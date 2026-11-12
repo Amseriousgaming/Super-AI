@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1119">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Personal Super AI: an academic assistant for mathematics, science, humanities and computer science, from elementary school to research level.">
+  <title>Personal Super AI</title>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%230d1119'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%238da2ff' font-family='serif'%3E%CF%80%3C/text%3E%3C/svg%3E">
+
+  <!-- Fonts (free, Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap">
+
+  <!-- Free libraries: KaTeX (math), highlight.js (code) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- ========== SVG ICON SPRITE ========== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-stop" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2" fill="currentColor"/></symbol>
+      <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="9" cy="10" r="1.6" fill="currentColor"/><path d="M4 17l5-4.5 4 3.5 3-2.5 4 3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+      <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6H8l1.2-1.8h5.6L16 6h1.5A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 8.5V6.5A2.5 2.5 0 0 0 13 4H6.5A2.5 2.5 0 0 0 4 6.5V13A2.5 2.5 0 0 0 6.5 15.5h2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3M19.5 4.5v4h-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 7V5h4v2M7 7l.8 12h8.4L17 7M10.5 11v5M13.5 11v5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+      <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"/><circle cx="15" cy="7" r="2" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="9" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+      <symbol id="i-tools" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4.5l8.5 15h-17z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10v4M12 16.8v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    </defs>
+  </svg>
+
+  <noscript>
+    <div class="noscript">Personal Super AI needs JavaScript to run. Turn it on in your browser settings and reload.</div>
+  </noscript>
+
+  <div class="app" id="app">
+
+    <!-- ========== SIDEBAR: conversation history ========== -->
+    <aside class="sidebar" id="sidebar" aria-label="Conversations">
+      <div class="sidebar__head">
+        <div class="brand">
+          <span class="brand__mark" aria-hidden="true">&pi;</span>
+          <span class="brand__name">Personal Super AI</span>
+        </div>
+        <button class="icon-btn sidebar__close" id="sidebarCloseBtn" type="button" aria-label="Close sidebar">
+          <svg class="icon"><use href="#i-close"/></svg>
+        </button>
+      </div>
+
+      <button class="btn btn--primary btn--block" id="newChatBtn" type="button">
+        <svg class="icon"><use href="#i-plus"/></svg>
+        <span>New conversation</span>
+      </button>
+
+      <label class="search" for="historySearch">
+        <svg class="icon"><use href="#i-search"/></svg>
+        <input id="historySearch" type="search" placeholder="Search conversations" autocomplete="off" enterkeyhint="search">
+      </label>
+
+      <nav class="history" id="conversationList" aria-label="Saved conversations"></nav>
+
+      <p class="history__empty" id="historyEmpty" hidden>No conversations yet. Ask your first question to start one.</p>
+
+      <div class="sidebar__foot">
+        <button class="btn btn--ghost" id="settingsBtn" type="button">
+          <svg class="icon"><use href="#i-sliders"/></svg>
+          <span>Settings</span>
+        </button>
+        <button class="btn btn--ghost btn--danger" id="clearAllBtn" type="button">
+          <svg class="icon"><use href="#i-trash"/></svg>
+          <span>Clear all</span>
+        </button>
+      </div>
+    </aside>
+    <div class="scrim" id="sidebarScrim" hidden></div>
+
+    <!-- ========== MAIN ========== -->
+    <main class="main" id="main">
+
+      <header class="topbar">
+        <button class="icon-btn" id="sidebarOpenBtn" type="button" aria-label="Open conversations" aria-controls="sidebar" aria-expanded="false">
+          <svg class="icon"><use href="#i-menu"/></svg>
+        </button>
+        <h1 class="topbar__title" id="conversationTitle">New conversation</h1>
+        <button class="icon-btn" id="newChatTopBtn" type="button" aria-label="New conversation">
+          <svg class="icon"><use href="#i-plus"/></svg>
+        </button>
+      </header>
+
+      <!-- Scrollable conversation area -->
+      <section class="stage" id="stage" aria-label="Conversation">
+
+        <!-- Welcome / empty state -->
+        <div class="welcome" id="welcome">
+          <h2 class="welcome__title">What are you working on?</h2>
+          <p class="welcome__lead">Ask a question or upload a photo of a problem. Pick a subject and level below, or leave both on automatic.</p>
+
+          <div class="subject-grid" id="subjectGrid" role="group" aria-label="Subjects">
+            <!-- Subject chips are generated from the SUBJECTS list in script.js -->
+          </div>
+        </div>
+
+        <!-- Messages -->
+        <div class="messages" id="messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+        <button class="jump" id="jumpBtn" type="button" aria-label="Scroll to latest message" hidden>
+          <svg class="icon" style="transform:rotate(180deg)"><use href="#i-send"/></svg>
+        </button>
+      </section>
+
+      <!-- ========== COMPOSER ========== -->
+      <footer class="composer" id="composer">
+
+        <!-- Subject / level / mode selectors -->
+        <div class="context-bar" id="contextBar">
+          <label class="pill">
+            <span class="pill__label">Subject</span>
+            <select id="subjectSelect" name="subject" aria-label="Subject"></select>
+          </label>
+          <label class="pill">
+            <span class="pill__label">Level</span>
+            <select id="levelSelect" name="level" aria-label="Academic level"></select>
+          </label>
+          <label class="pill">
+            <span class="pill__label">Mode</span>
+            <select id="modeSelect" name="mode" aria-label="Answer mode"></select>
+          </label>
+          <button class="pill pill--button" id="toolsBtn" type="button" aria-haspopup="dialog" aria-label="Tools and models">
+            <svg class="icon"><use href="#i-tools"/></svg>
+            <span class="pill__label">Tools</span>
+          </button>
+        </div>
+
+        <!-- Image previews before sending -->
+        <div class="attachments" id="attachmentTray" aria-label="Attached images" hidden></div>
+
+        <form class="composer__form" id="composerForm" autocomplete="off">
+          <div class="composer__attach">
+            <button class="icon-btn" id="attachBtn" type="button" aria-label="Upload image from device">
+              <svg class="icon"><use href="#i-image"/></svg>
+            </button>
+            <button class="icon-btn" id="cameraBtn" type="button" aria-label="Take a photo">
+              <svg class="icon"><use href="#i-camera"/></svg>
+            </button>
+          </div>
+
+          <textarea id="questionInput" name="question" rows="1" maxlength="20000"
+            placeholder="Ask a question, or paste an image"
+            aria-label="Your question" enterkeyhint="send" spellcheck="true"></textarea>
+
+          <button class="send-btn" id="sendBtn" type="submit" aria-label="Send question" disabled>
+            <svg class="icon"><use href="#i-send"/></svg>
+          </button>
+          <button class="send-btn send-btn--stop" id="stopBtn" type="button" aria-label="Stop generating" hidden>
+            <svg class="icon"><use href="#i-stop"/></svg>
+          </button>
+        </form>
+
+        <input type="file" id="fileInput" accept="image/*" multiple hidden>
+        <input type="file" id="cameraInput" accept="image/*" capture="environment" hidden>
+
+        <p class="composer__note">Answers come from the AI model behind your backend and can contain mistakes. Check important results.</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- ========== SETTINGS DIALOG ========== -->
+  <dialog class="sheet" id="settingsDialog" aria-labelledby="settingsTitle">
+    <form method="dialog" class="sheet__inner" id="settingsForm">
+      <header class="sheet__head">
+        <h2 id="settingsTitle">Settings</h2>
+        <button class="icon-btn" value="cancel" aria-label="Close settings">
+          <svg class="icon"><use href="#i-close"/></svg>
+        </button>
+      </header>
+
+      <div class="field">
+        <label for="endpointInput">Backend endpoint</label>
+        <input id="endpointInput" type="text" inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="/api/chat">
+        <p class="field__hint">The app sends a POST request here. Use a relative path or the full URL of your secure backend. Never place API keys in this app.</p>
+      </div>
+
+      <div class="field">
+        <label for="historyLimitInput">Messages sent as context</label>
+        <input id="historyLimitInput" type="number" min="0" max="100" step="1" inputmode="numeric">
+        <p class="field__hint">How many earlier messages go to the backend with each question.</p>
+      </div>
+
+      <div class="field">
+        <label for="imageSizeInput">Image size limit (pixels)</label>
+        <input id="imageSizeInput" type="number" min="512" max="4096" step="128" inputmode="numeric">
+        <p class="field__hint">Large photos are scaled down on your device before sending, so uploads stay fast on mobile data.</p>
+      </div>
+
+      <div class="field field--row">
+        <div>
+          <label for="streamToggle">Stream answers</label>
+          <p class="field__hint">Use when your backend returns a server-sent event stream.</p>
+        </div>
+        <input id="streamToggle" type="checkbox" role="switch">
+      </div>
+
+      <footer class="sheet__foot">
+        <button class="btn btn--ghost" type="button" id="settingsResetBtn">Restore defaults</button>
+        <button class="btn btn--primary" value="save" id="settingsSaveBtn">Save settings</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- ========== TOOLS / MODELS DIALOG (future features) ========== -->
+  <dialog class="sheet" id="toolsDialog" aria-labelledby="toolsTitle">
+    <form method="dialog" class="sheet__inner">
+      <header class="sheet__head">
+        <h2 id="toolsTitle">Tools and models</h2>
+        <button class="icon-btn" value="cancel" aria-label="Close tools">
+          <svg class="icon"><use href="#i-close"/></svg>
+        </button>
+      </header>
+
+      <div class="field">
+        <label for="modelSelect">Model</label>
+        <select id="modelSelect" name="model"></select>
+        <p class="field__hint">The list of models is defined by your backend. Until you connect more than one, the backend default is used.</p>
+      </div>
+
+      <!-- Each tool is described in script.js (FEATURES). Items marked unavailable are placeholders for later phases. -->
+      <ul class="tool-list" id="toolList"></ul>
+
+      <footer class="sheet__foot">
+        <button class="btn btn--primary" value="done">Done</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- ========== TEMPLATES ========== -->
+  <template id="messageTemplate">
+    <article class="msg">
+      <div class="msg__avatar" aria-hidden="true"></div>
+      <div class="msg__col">
+        <div class="msg__who"></div>
+        <div class="msg__images"></div>
+        <div class="msg__body"></div>
+        <div class="msg__actions">
+          <button class="chip-btn" type="button" data-action="copy" aria-label="Copy answer">
+            <svg class="icon"><use href="#i-copy"/></svg><span>Copy</span>
+          </button>
+          <button class="chip-btn" type="button" data-action="regenerate" aria-label="Regenerate answer">
+            <svg class="icon"><use href="#i-refresh"/></svg><span>Retry</span>
+          </button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <template id="conversationItemTemplate">
+    <div class="history__item" role="group">
+      <button class="history__open" type="button" data-action="open">
+        <span class="history__title"></span>
+        <span class="history__meta"></span>
+      </button>
+      <button class="icon-btn history__delete" type="button" data-action="delete" aria-label="Delete conversation">
+        <svg class="icon"><use href="#i-trash"/></svg>
+      </button>
+    </div>
+  </template>
+
+  <template id="attachmentTemplate">
+    <figure class="attachment">
+      <img alt="">
+      <button class="attachment__remove" type="button" aria-label="Remove image">
+        <svg class="icon"><use href="#i-close"/></svg>
+      </button>
+    </figure>
+  </template>
+
+  <template id="toolItemTemplate">
+    <li class="tool">
+      <div class="tool__text">
+        <span class="tool__name"></span>
+        <span class="tool__desc"></span>
+      </div>
+      <span class="tool__status"></span>
+      <input type="checkbox" role="switch" class="tool__switch">
+    </li>
+  </template>
+
+  <!-- Toasts and image lightbox -->
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Image preview">
+    <form method="dialog">
+      <button class="icon-btn lightbox__close" aria-label="Close image">
+        <svg class="icon"><use href="#i-close"/></svg>
+      </button>
+    </form>
+    <img id="lightboxImg" alt="">
+  </dialog>
+
+  <!-- ========== LIBRARIES (free, loaded from CDN) ========== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <!-- App logic -->
+  <script src="script.js"></script>
+</body>
+</html>
