@@ -23,7 +23,7 @@ from typing import Optional
 import httpx
 
 from ai.base import Source
-from cache import TTLCache
+from services.cache import TTLCache
 
 log = logging.getLogger("psai.knowledge")
 _TAG = re.compile(r"<[^>]+>")
