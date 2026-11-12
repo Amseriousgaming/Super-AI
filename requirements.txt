@@ -1,0 +1,13 @@
+# Personal Super AI backend: runtime dependencies (all free and open source)
+fastapi>=0.115,<1.0          # web framework (routes, validation, OpenAPI docs)
+uvicorn[standard]>=0.30      # ASGI server
+pydantic>=2.7,<3             # request/response models
+pydantic-settings>=2.3       # typed configuration from environment variables
+python-dotenv>=1.0           # reads backend/.env
+httpx>=0.27                  # reusable async HTTP client for AI providers and research sources
+aiosqlite>=0.20              # async SQLite (conversations, preferences, memory)
+python-multipart>=0.0.9      # multipart uploads for /api/analyze-image
+Pillow>=10.3                 # image validation and normalisation
+sympy>=1.12                  # symbolic mathematics
+numpy>=1.26                  # numeric arrays
+scipy>=1.11                  # statistics, integration, optimisation, ODEs, constants
