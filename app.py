@@ -24,7 +24,8 @@ from typing import Any, Optional
 from fastapi import Depends, FastAPI, Header, HTTPException, Path as ApiPath, Query, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.responses import JSONResponse, StreamingResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import ValidationError
 from starlette.datastructures import UploadFile
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -231,8 +232,7 @@ def create_app(settings: Optional[Settings] = None, providers: Optional[list[AIP
     # --- system ---------------------------------------------------------------------------
     @app.get("/", include_in_schema=False)
     async def root():
-        return {"name": "Personal Super AI", "version": APP_VERSION, "health": "/api/health",
-                "docs": None if production else "/docs"}
+        return FileResponse("index.html")
 
     @app.get("/api/health", response_model=HealthResponse)
     async def health(c: Container = Depends(get_container)):
@@ -351,6 +351,9 @@ def create_app(settings: Optional[Settings] = None, providers: Optional[list[AIP
         if not c.settings.enable_compute_api:
             raise HTTPException(404, "The compute API is disabled. Set ENABLE_COMPUTE_API=true to enable it.")
         return ComputeResponse(ok=True, result=await c.engines.run(body.engine, body.operation, body.args))
+
+    # --- static frontend files (serves your HTML, CSS, JS) ---
+    app.mount("/", StaticFiles(directory=".", html=True), name="static")
 
     return app
 
